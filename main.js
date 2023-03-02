@@ -16,7 +16,6 @@ const randomize = () => {
 const download =async () => {
     let image = document.getElementById('avatar-result')
     const canvas = await html2canvas(image)
-    debugger;
     const base64 = canvas.toDataURL();
     const a = document.createElement("a")
     a.href = base64;
