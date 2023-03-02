@@ -8,7 +8,9 @@ ruby webserver
 
 ## Screenshots and demo
 Screenshots of your app and/or a link to your live demo
-https://user-images.githubusercontent.com/42076631/222583486-a1585c63-5b1f-4b37-8b04-3a47b360b57a.mov
+
+https://user-images.githubusercontent.com/42076631/222584769-28d61d25-742b-4763-ab65-f40066a5176d.mov
+
 
 ## Installation
 Ensure that you have ruby installed.
