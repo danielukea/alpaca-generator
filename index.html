@@ -6,230 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpaca Generator</title>
-    <style>
-        body {
-            background-color: #EEECEE;
-            font-family: Arial, Helvetica, sans-serif;
-            padding: 32px;
-            justify-items: center;
-        }
-        .app-container {
-            padding: 32px;
-        }
 
-        h1 {
-            text-transform: uppercase;
-        }
-
-        .togglebutton {
-            display: block;
-            border-style: solid;
-            border-width: 2px;
-            border-radius: 32px;
-            width: fit-content;
-            height: fit-content;
-            padding: 8px;
-        }
-
-        .togglebutton:hover {
-            color: green;
-            border-color: green;
-
-        }
-
-        .togglebutton:active {
-            color: grey;
-            border-color: grey;
-            background: green;
-        }
-
-        .avatar {
-            display: grid;
-        }
-
-        .avatar>img {
-            grid-area: 1 / 1;
-        }
-
-        .choices {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            column-gap: 8px;
-        }
-
-        .generator-container {
-            display: flex;
-            gap: 16px;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: row;
-            gap: 16px;
-            justify-content: left;
-            padding: 8px;
-        }
-
-        button.control {
-            background-color: white;
-            font-size: x-large;
-            padding: 8px;
-            border-radius: 8px;
-        }
-
-        button.control:hover {
-            background-color: grey;
-        }
-
-
-        .button-container>div {
-            display: flex
-        }
-    </style>
-
-    <script>
-        'use strict'
-        const assets = {
-            accessories: {
-                earings: './assets/alpaca/accessories/earings.png',
-                flower: './assets/alpaca/accessories/flower.png',
-                glasses: './assets/alpaca/accessories/glasses.png',
-                headphone: './assets/alpaca/accessories/headphone.png',
-                none: '',
-            },
-            backgrounds: {
-                blue50: './assets/alpaca/backgrounds/blue50.png',
-                blue60: './assets/alpaca/backgrounds/blue60.png',
-                blue70: './assets/alpaca/backgrounds/blue70.png',
-                darkblue30: './assets/alpaca/backgrounds/darkblue30.png',
-                darkblue50: './assets/alpaca/backgrounds/darkblue50.png',
-                darkblue70: './assets/alpaca/backgrounds/darkblue70.png',
-                green50: './assets/alpaca/backgrounds/green50.png',
-                green60: './assets/alpaca/backgrounds/green60.png',
-                green70: './assets/alpaca/backgrounds/green70.png',
-                grey40: './assets/alpaca/backgrounds/grey40.png',
-                grey70: './assets/alpaca/backgrounds/grey70.png',
-                grey80: './assets/alpaca/backgrounds/grey80.png',
-                red50: './assets/alpaca/backgrounds/red50.png',
-                red60: './assets/alpaca/backgrounds/red60.png',
-                red70: './assets/alpaca/backgrounds/red70.png',
-                yellow50: './assets/alpaca/backgrounds/yellow50.png',
-                yellow60: './assets/alpaca/backgrounds/yellow60.png',
-                yellow70: './assets/alpaca/backgrounds/yellow70.png',
-            },
-            ears: {
-                default: './assets/alpaca/ears/default.png',
-                backward: './assets/alpaca/ears/tilt-backward.png',
-                forward: './assets/alpaca/ears/tilt-forward.png',
-            },
-            eyes: {
-                angry: './assets/alpaca/eyes/angry.png',
-                default: './assets/alpaca/eyes/default.png',
-                naughty: './assets/alpaca/eyes/naughty.png',
-                panda: './assets/alpaca/eyes/panda.png',
-                smart: './assets/alpaca/eyes/smart.png',
-                star: './assets/alpaca/eyes/star.png',
-            },
-            hair: {
-                bang: './assets/alpaca/hair/bang.png',
-                curls: './assets/alpaca/hair/curls.png',
-                default: './assets/alpaca/hair/default.png',
-                elegant: './assets/alpaca/hair/elegant.png',
-                fancy: './assets/alpaca/hair/fancy.png',
-                quiff: './assets/alpaca/hair/quiff.png',
-                short: './assets/alpaca/hair/short.png',
-            },
-            leg: {
-                tea: './assets/alpaca/leg/bubble-tea.png',
-                cookie: './assets/alpaca/leg/cookie.png',
-                default: './assets/alpaca/leg/default.png',
-                console: './assets/alpaca/leg/game-console.png',
-                backward: './assets/alpaca/leg/tilt-backward.png',
-                forward: './assets/alpaca/leg/tilt-forward.png',
-            },
-            mouth: {
-                astonished: './assets/alpaca/mouth/astonished.png',
-                default: './assets/alpaca/mouth/default.png',
-                eating: './assets/alpaca/mouth/eating.png',
-                laugh: './assets/alpaca/mouth/laugh.png',
-                tongue: './assets/alpaca/mouth/tongue.png',
-            },
-            neck: {
-                backward: './assets/alpaca/neck/bend-backward.png',
-                forward: './assets/alpaca/neck/bend-forward.png',
-                default: './assets/alpaca/neck/default.png',
-                thick: './assets/alpaca/neck/thick.png',
-            },
-            nose: {
-                default: './assets/nose.png'
-            }
-        }
-
-        const randomize = () => {
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const renderOptions = () => {
-                let attr = characteristic.getAttribute('activeAttr')
-                let activeOptions = Object.keys(assets[attr])
-
-                let newOpts = activeOptions.map((each) => {
-                    return render_button(each, (e) => {
-                        let value = e.composedPath()[0].value
-                        console.log(value)
-                        let key = `image_${attr}`
-                        let pic = document.getElementById(key)
-                        let path = assets[attr][value] || ''
-                        pic.setAttribute('src', path)
-                    }
-                    )
-                }
-                )
-                options.replaceChildren(...newOpts)
-            }
-
-            const render_button = (name, onclick) => {
-                let elem = document.createElement('button')
-                elem.textContent = name
-                elem.classList.add('togglebutton')
-                elem.onclick = onclick
-                elem.id = `id_${name}`
-                elem.value = name
-                return elem;
-            }
-
-
-            var choice = document.getElementById('choice_1')
-
-            const toggleButton = (val) => {
-                choice.setAttribute('activeAccessory', val)
-            }
-
-            // render all of the buttons
-            var characteristic = document.getElementById("characteristic")
-            var options = document.getElementById('options')
-
-            characteristic.setAttribute("activeAttr", 'accessories') // default
-            console.log(options.children.length)
-            if (options.children.length === 0) { renderOptions() }
-
-            var charOptions = Object.keys(assets)
-
-            const toggleAttr = (event) => {
-                let elem = event.composedPath()[0]
-                characteristic.setAttribute('activeAttr', elem.value)
-                renderOptions()
-            }
-
-            charOptions.forEach((attr) => {
-                let elem = render_button(attr, toggleAttr)
-                characteristic.appendChild(elem)
-            }
-            )
-        }
-        )
-    </script>
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="./assets.js"></script>
+    <script src="./main.js"> </script>
 </head>
 
 <body>
@@ -241,20 +22,20 @@
         </header>
         <div class="generator-container">
             <div class="alpaca-image">
-                <div class="avatar">
-                    <image id='image_backgrounds' src="./assets/alpaca/backgrounds/blue50.png"></image>
-                    <image id='image_neck' src="./assets/alpaca/neck/default.png"></image>
-                    <image id='image_nose' src="./assets/alpaca/nose.png"></image>
-                    <image id='image_ears' src="./assets/alpaca/ears/default.png"></image>
-                    <image id='image_hair' src="./assets/alpaca/hair/default.png"></image>
-                    <image id='image_eyes' src="./assets/alpaca/eyes/default.png"></image>
-                    <image id='image_leg' src="./assets/alpaca/leg/default.png"></image>
-                    <image id='image_mouth' src="./assets/alpaca/mouth/default.png"></image>
-                    <image id='image_accessories' src="./assets/alpaca/accessories/headphone.png"></image>
+                <div id="avatar-result" class="avatar">
+                    <img alt='' id='image_backgrounds' src="./assets/alpaca/backgrounds/blue50.png">
+                    <img alt='' id='image_neck' src="./assets/alpaca/neck/default.png">
+                    <img alt='' id='image_nose' src="./assets/alpaca/nose.png">
+                    <img alt='' id='image_ears' src="./assets/alpaca/ears/default.png">
+                    <img alt='' id='image_hair' src="./assets/alpaca/hair/default.png">
+                    <img alt='' id='image_eyes' src="./assets/alpaca/eyes/default.png">
+                    <img alt='' id='image_leg' src="./assets/alpaca/leg/default.png">
+                    <img alt='' id='image_mouth' src="./assets/alpaca/mouth/default.png">
+                    <img alt='' id='image_accessories' src="./assets/alpaca/accessories/headphone.png">
                 </div>
                 <div class="button-container">
-                    <button class="control" id="randomize-button">Randomize</button>
-                    <button class="control" id="download-button">Download</button>
+                    <button class="control" id="randomize-button" onclick="randomize()">Randomize</button>
+                    <button class="control" id="download-button" onclick="download()">Download</button>
                 </div>
             </div>
             <div>
@@ -265,6 +46,7 @@
             </div>
         </div>
     </div>
+    <!-- <canvas id="merge-result"></canvas> -->
 </body>
 
 </html>

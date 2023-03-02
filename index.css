@@ -1,0 +1,79 @@
+body {
+            background-color: #EEECEE;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 32px;
+            justify-items: center;
+        }
+        .app-container {
+            padding: 32px;
+        }
+
+        h1 {
+            text-transform: uppercase;
+        }
+
+        .togglebutton {
+            display: block;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 32px;
+            width: fit-content;
+            height: fit-content;
+            padding: 8px;
+        }
+
+        .togglebutton:hover {
+            color: green;
+            border-color: green;
+
+        }
+
+        .togglebutton:active {
+            color: grey;
+            border-color: grey;
+            background: green;
+        }
+
+        .avatar {
+            display: grid;
+        }
+
+        .avatar>img {
+            grid-area: 1 / 1;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            column-gap: 8px;
+        }
+
+        .generator-container {
+            display: flex;
+            gap: 16px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: left;
+            padding: 8px;
+        }
+
+        button.control {
+            background-color: white;
+            font-size: x-large;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        button.control:hover {
+            background-color: grey;
+        }
+
+
+        .button-container>div {
+            display: flex
+        }
