@@ -13,6 +13,9 @@
             padding: 32px;
             justify-items: center;
         }
+        .app-container {
+            padding: 32px;
+        }
 
         h1 {
             text-transform: uppercase;
@@ -39,10 +42,12 @@
             border-color: grey;
             background: green;
         }
+
         .avatar {
             display: grid;
         }
-        .avatar > img {
+
+        .avatar>img {
             grid-area: 1 / 1;
         }
 
@@ -61,7 +66,22 @@
         .button-container {
             display: flex;
             flex-direction: row;
+            gap: 16px;
+            justify-content: left;
+            padding: 8px;
         }
+
+        button.control {
+            background-color: white;
+            font-size: x-large;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        button.control:hover {
+            background-color: grey;
+        }
+
 
         .button-container>div {
             display: flex
@@ -146,99 +166,103 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", ()=> {
+        const randomize = () => {
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
             const renderOptions = () => {
-               let attr = characteristic.getAttribute('activeAttr')
-               let activeOptions = Object.keys(assets[attr])
+                let attr = characteristic.getAttribute('activeAttr')
+                let activeOptions = Object.keys(assets[attr])
 
-               let newOpts = activeOptions.map((each) => {
-                  return render_button(each, (e) => { 
-                    let value = e.composedPath()[0].value
-                    console.log(value)
-                    let key = `image_${attr}`
-                    let pic  = document.getElementById(key)
-                    let path = assets[attr][value] || ''
-                    pic.setAttribute('src', path)
-                  }
-               )
-               }
-               )
-               options.replaceChildren(...newOpts)
-           }
+                let newOpts = activeOptions.map((each) => {
+                    return render_button(each, (e) => {
+                        let value = e.composedPath()[0].value
+                        console.log(value)
+                        let key = `image_${attr}`
+                        let pic = document.getElementById(key)
+                        let path = assets[attr][value] || ''
+                        pic.setAttribute('src', path)
+                    }
+                    )
+                }
+                )
+                options.replaceChildren(...newOpts)
+            }
 
-           const render_button = (name, onclick) => {
-               let elem = document.createElement('button')
-               elem.textContent = name
-               elem.classList.add('togglebutton')
-               elem.onclick = onclick
-               elem.id = `id_${name}`
-               elem.value = name
-               return elem;
-           }
+            const render_button = (name, onclick) => {
+                let elem = document.createElement('button')
+                elem.textContent = name
+                elem.classList.add('togglebutton')
+                elem.onclick = onclick
+                elem.id = `id_${name}`
+                elem.value = name
+                return elem;
+            }
 
 
-           var choice = document.getElementById('choice_1')
+            var choice = document.getElementById('choice_1')
 
-           const toggleButton = (val) => {
-               choice.setAttribute('activeAccessory', val)
-           }
+            const toggleButton = (val) => {
+                choice.setAttribute('activeAccessory', val)
+            }
 
-           // render all of the buttons
-           var characteristic = document.getElementById("characteristic")
-           var options = document.getElementById('options')
+            // render all of the buttons
+            var characteristic = document.getElementById("characteristic")
+            var options = document.getElementById('options')
 
-           characteristic.setAttribute("activeAttr", 'accessories') // default
-           console.log(options.children.length)
-           if(options.children.length===0) { renderOptions() }
+            characteristic.setAttribute("activeAttr", 'accessories') // default
+            console.log(options.children.length)
+            if (options.children.length === 0) { renderOptions() }
 
-           var charOptions = Object.keys(assets)
+            var charOptions = Object.keys(assets)
 
-           const toggleAttr = (event) => {
-               let elem = event.composedPath()[0]
-               characteristic.setAttribute('activeAttr', elem.value)
-               renderOptions()
-           }
+            const toggleAttr = (event) => {
+                let elem = event.composedPath()[0]
+                characteristic.setAttribute('activeAttr', elem.value)
+                renderOptions()
+            }
 
-           charOptions.forEach((attr) => {
-               let elem = render_button(attr, toggleAttr)
-               characteristic.appendChild(elem)
-             }
-           )
-         }
+            charOptions.forEach((attr) => {
+                let elem = render_button(attr, toggleAttr)
+                characteristic.appendChild(elem)
+            }
+            )
+        }
         )
     </script>
 </head>
 
 <body>
-    <header>
-        <h1>
-            Alpaca Generator
-        </h1>
-    </header>
-    <div class="generator-container">
-        <div class="alpaca-image">
-            <div class="avatar" >
-              <image id='image_backgrounds' src="./assets/alpaca/backgrounds/blue50.png"></image>
-              <image id='image_neck' src="./assets/alpaca/neck/default.png"></image>
-              <image id='image_nose' src="./assets/alpaca/nose.png"></image>
-              <image id='image_ears' src="./assets/alpaca/ears/default.png"></image>
-              <image id='image_hair' src="./assets/alpaca/hair/default.png"></image>
-              <image id='image_eyes' src="./assets/alpaca/eyes/default.png"></image>
-              <image id='image_leg'  src="./assets/alpaca/leg/default.png"></image>
-              <image id='image_mouth'src="./assets/alpaca/mouth/default.png"></image>
-              <image id='image_accessories' src="./assets/alpaca/accessories/headphone.png"></image>
+    <div class="app-container">
+        <header>
+            <h1>
+                Alpaca Generator
+            </h1>
+        </header>
+        <div class="generator-container">
+            <div class="alpaca-image">
+                <div class="avatar">
+                    <image id='image_backgrounds' src="./assets/alpaca/backgrounds/blue50.png"></image>
+                    <image id='image_neck' src="./assets/alpaca/neck/default.png"></image>
+                    <image id='image_nose' src="./assets/alpaca/nose.png"></image>
+                    <image id='image_ears' src="./assets/alpaca/ears/default.png"></image>
+                    <image id='image_hair' src="./assets/alpaca/hair/default.png"></image>
+                    <image id='image_eyes' src="./assets/alpaca/eyes/default.png"></image>
+                    <image id='image_leg' src="./assets/alpaca/leg/default.png"></image>
+                    <image id='image_mouth' src="./assets/alpaca/mouth/default.png"></image>
+                    <image id='image_accessories' src="./assets/alpaca/accessories/headphone.png"></image>
+                </div>
+                <div class="button-container">
+                    <button class="control" id="randomize-button">Randomize</button>
+                    <button class="control" id="download-button">Download</button>
+                </div>
             </div>
-            <div class="button-container">
-                <div id="randomize-button">Randomize</div>
-                <div id="download-button">Download</div>
-                <submit>Download</submit>
+            <div>
+                <h3>Accessorize the Alpaca's</h3>
+                <div id='characteristic' class="choices"> <!-- filled with javascript --> </div>
+                <h3>Styles</h3>
+                <div id="options" class="choices"> <!-- filled by javascript --> </div>
             </div>
-        </div>
-        <div>
-            <h3>Accessorize the Alpaca's</h3>
-            <div id='characteristic' class="choices"> <!-- filled with javascript --> </div>
-            <h3>Styles:</h3>
-            <div id="options" class="choices"> <!-- filled by javascript --> </div>
         </div>
     </div>
 </body>
